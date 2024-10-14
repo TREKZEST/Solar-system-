@@ -1,100 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 body {
-background-color: #08e7ef;
+height: 100vh;
+overflow: hidden;
+background-color: #000;
+display: flex;
+align-items: center;
+justify-content: center;
 }
-#smoke-box {
+.pixel {
 position: absolute;
-width: 1px;
-height: 160px;
-bottom: 50%;
-left: 50%;
-z-index: 3;
+width: 12px;
+height: 12px;
+background-color: #00ff00;
+opacity: 0.8;
+animation: fall 5s linear infinite;
 }
-#smoke-box span {
-display: block;
-position: absolute;
-left: 50%;
-bottom: -35px;
-margin-left: -20px;
-width: 0;
-height: 0;
-border: 35px solid #4b4b4b;
-border-radius: 35px;
-opacity: 0;
-transform: scale(0.2);
-}
-@keyframes smoke-boxL {
+@keyframes fall {
 0% {
-transform: scale(0.2) translate(0, 0)
-}
-10% {
-opacity: 1;
-transform: scale(0.2) translate(0, -5px)
+transform: translateY(-100vh);
 }
 100% {
-opacity: 0;
-transform: scale(1) translate(-20px, -130px)
+transform: translateY(100vh);
 }
-}
-@keyframes smoke-boxR {
-0% {
-transform: scale(0.2) translate(0, 0)
-}
-10% {
-opacity: 1;
-transform: scale(0.2) translate(0, -5px)
-}
-100% {
-opacity: 0;
-transform: scale(1) translate(20px, -130px)
-}
-}
-#smoke-box .s0 {
-animation: smoke-boxL 10s 0s infinite
-}
-#smoke-box .s1 {
-animation: smoke-boxR 10s 1s infinite
-}
-#smoke-box .s2 {
-animation: smoke-boxL 10s 2s infinite
-}
-#smoke-box .s3 {
-animation: smoke-boxR 10s 3s infinite
-}
-#smoke-box .s4 {
-animation: smoke-boxL 10s 4s infinite
-}
-#smoke-box .s5 {
-animation: smoke-boxR 10s 5s infinite
-}
-#smoke-box .s6 {
-animation: smoke-boxL 10s 6s infinite
-}
-#smoke-box .s7 {
-animation: smoke-boxR 10s 7s infinite
-}
-#smoke-box .s8 {
-animation: smoke-boxL 10s 8s infinite
-}
-#smoke-box .s9 {
-animation: smoke-boxR 10s 9s infinite
 }
 </style>
-</head><body>
-<div id="smoke-box">
-<span class="s0"></span>
-<span class="s1"></span>
-<span class="s2"></span>
-<span class="s3"></span>
-<span class="s4"></span>
-<span class="s5"></span>
-<span class="s6"></span>
-<span class="s7"></span>
-<span class="s8"></span>
-<span class="s9"></span>
-</div>
-</body>
+</head>
+<body><script>
+const createPixel = () => {
+const pixel = document.createElement('div');
+pixel.classList.add('pixel');
+pixel.style.left = `${Math.random() * 100}vw`;
+pixel.style.backgroundColor = getRandomColor();
+pixel.style.animationDuration = `${Math.random() * 3 + 3}s`;
+document.body.appendChild(pixel);setTimeout(() => pixel.remove(), 5000);
+};const getRandomColor = () => {
+const colors = ['#ff5733', '#33c9ff', '#00ff00', '#ff33f6', '#faff33'];
+return colors[Math.floor(Math.random() * colors.length)];
+};setInterval(createPixel, 100);
+</script></body>
 </html>
