@@ -1,67 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <style>
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+body{
+height: 95vh;
+display: grid;
+place-items: center;
+background: black;
 }
-body {
-height: 100vh;
-background-color: #0e0e0e;
-overflow: hidden;
-display: flex;
-justify-content: center;
-align-items: center;
+.flame-box{
+height: 60px;
+width: 60px;
+transform-origin: center bottom;
+animation: flicker 3ms 200ms ease-in infinite alternate;
 }
-.orb {
+.flame{
+bottom: 0;
 position: absolute;
-width: 70px;
-height: 70px;
-background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent 70%);
+border-top-left-radius: 50%;
+border-bottom-left-radius: 50%;
+border-bottom-right-radius: 50%;
+transform: rotate(-45deg) scale(1.5, 1.5);
+}
+.yellow{
+height: 30px;
+width: 30px;
+left: 15px;
+background: #ffd700;
+box-shadow: 0px 0px 9px 4px #ffd700;
+}
+.orange{
+left: 10px;
+width: 40px;
+height: 40px;
+background: #ffa500;
+box-shadow: 0px 0px 9px 4px #ffa500;
+}
+.red{
+height: 50px;
+width: 50px;
+left: 5px;
+background: #ff4500;
+box-shadow: 0px 0px 5px 4px #ff4500;
+}
+.white{
+height: 30px;
+width: 30px;
+left: 15px;
+bottom: -4px;
+background: #ffffff;
+box-shadow: 0px 0px 9px 4px #ffffff;
+}
+.circle{
 border-radius: 50%;
-box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
-animation: float 6s ease-in-out infinite;
+position: absolute;
 }
-@keyframes float {
-0% {
-transform: translate(0, 0) scale(1);
+.blue{
+left: 25px;
+bottom: -25px;
+width: 10px;
+height: 10px;
+background: #6a5acd;
+box-shadow: 0px 0px 15px 10px #6a5acd;
 }
-25% {
-transform: translate(80px, -100px) scale(1.1);
+.black{
+left: 10px;
+bottom: -60px;
+width: 40px;
+height: 40px;
+background: #000000;
+box-shadow: 0px 0px 15px 10px #000000;
 }
-50% {
-transform: translate(-150px, 50px) scale(0.9);
-}
-75% {
-transform: translate(100px, -30px) scale(1.2);
-}
-100% {
-transform: translate(0, 0) scale(1);
-}
+@keyframes flicker{
+0% {transform: rotate(-1deg);}
+20%{transform: rotate(1deg);}
+40%{transform: rotate(-1deg);}
+60%{transform: rotate(1deg) scaleY(1.04);}
+80%{transform: rotate(-2deg) scaleY(0.92);}
+100% {transform: rotate(1deg);}
 }
 </style>
 </head>
-<body><script>
-const createOrb = (color) => {
-const orb = document.createElement('div');
-orb.classList.add('orb');
-orb.style.background = `radial-gradient(circle, ${color}, transparent 70%)`;
-orb.style.left = `${Math.random() * 100}vw`;
-orb.style.top = `${Math.random() * 100}vh`;
-orb.style.animationDelay = `${Math.random() * 3}s`;
-document.body.appendChild(orb);
-};
-const colors = [
-'rgba(255, 99, 71, 0.8)',
-'rgba(135, 206, 235, 0.8)',
-'rgba(255, 215, 0, 0.8)',
-'rgba(152, 251, 152, 0.8)',
-'rgba(238, 130, 238, 0.8)',
-'rgba(70, 130, 180, 0.8)'
-];
-colors.forEach(color => createOrb(color));
-</script>
+<body>
+<div class="flame-box">
+<div class="red flame"></div>
+<div class="orange flame"></div>
+<div class="yellow flame"></div>
+<div class="white flame"></div>
+<div class="blue circle"></div>
+<div class="black circle"></div>
+</div>
 </body>
 </html>
