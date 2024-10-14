@@ -9,41 +9,59 @@ box-sizing: border-box;
 }
 body {
 height: 100vh;
+background-color: #0e0e0e;
 overflow: hidden;
-background-color: #000;
 display: flex;
-align-items: center;
 justify-content: center;
+align-items: center;
 }
-.pixel {
+.orb {
 position: absolute;
-width: 12px;
-height: 12px;
-background-color: #00ff00;
-opacity: 0.8;
-animation: fall 5s linear infinite;
+width: 70px;
+height: 70px;
+background: radial-gradient(circle, rgba(255, 255, 255, 0.8), transparent 70%);
+border-radius: 50%;
+box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.7);
+animation: float 6s ease-in-out infinite;
 }
-@keyframes fall {
+@keyframes float {
 0% {
-transform: translateY(-100vh);
+transform: translate(0, 0) scale(1);
+}
+25% {
+transform: translate(80px, -100px) scale(1.1);
+}
+50% {
+transform: translate(-150px, 50px) scale(0.9);
+}
+75% {
+transform: translate(100px, -30px) scale(1.2);
 }
 100% {
-transform: translateY(100vh);
+transform: translate(0, 0) scale(1);
 }
 }
 </style>
 </head>
 <body><script>
-const createPixel = () => {
-const pixel = document.createElement('div');
-pixel.classList.add('pixel');
-pixel.style.left = `${Math.random() * 100}vw`;
-pixel.style.backgroundColor = getRandomColor();
-pixel.style.animationDuration = `${Math.random() * 3 + 3}s`;
-document.body.appendChild(pixel);setTimeout(() => pixel.remove(), 5000);
-};const getRandomColor = () => {
-const colors = ['#ff5733', '#33c9ff', '#00ff00', '#ff33f6', '#faff33'];
-return colors[Math.floor(Math.random() * colors.length)];
-};setInterval(createPixel, 100);
-</script></body>
+const createOrb = (color) => {
+const orb = document.createElement('div');
+orb.classList.add('orb');
+orb.style.background = `radial-gradient(circle, ${color}, transparent 70%)`;
+orb.style.left = `${Math.random() * 100}vw`;
+orb.style.top = `${Math.random() * 100}vh`;
+orb.style.animationDelay = `${Math.random() * 3}s`;
+document.body.appendChild(orb);
+};
+const colors = [
+'rgba(255, 99, 71, 0.8)',
+'rgba(135, 206, 235, 0.8)',
+'rgba(255, 215, 0, 0.8)',
+'rgba(152, 251, 152, 0.8)',
+'rgba(238, 130, 238, 0.8)',
+'rgba(70, 130, 180, 0.8)'
+];
+colors.forEach(color => createOrb(color));
+</script>
+</body>
 </html>
